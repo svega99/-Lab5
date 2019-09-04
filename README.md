@@ -21,17 +21,21 @@
 	![Alt text](img/1.4.PNG)
 	
 	![Alt text](img/1.5.PNG)
+	
+	![Alt text](img/1.5.2.PNG)
 
 * 	Modify the controller so that it now accepts GET requests to the resource/blueprints/{author}/{bpname}, which returns using a JSON representation only ONE plane, in this case the one made by {author} and whose name is {bpname}. Again, if there is no such author, you must respond with the HTTP 404 error code.
 
 	![Alt text](img/1.6.PNG)
 	
 	![Alt text](img/1.7.PNG)
+	
+	![Alt text](img/1.7.2.PNG)
 
 ## PART II
 *	Add the handling of POST requests (creation of new plans), so that an http client can register a new order by making a POST request to the resource planes, and sending as content of the request all the detail of said resource through a JSON document. For this, consider the following example, which considers - by consistency with the HTTP protocol - the handling of HTTP status codes (in case of success or error):
 
-	![Alt text](img/1.7.PNG)
+	![Alt text](img/2.1.PNG)
 
 *	To test that the planes resource correctly accepts and interprets POST requests, use the Unix curl command. This command has as a parameter the type of content handled (in this case JSON), and the message body that will go with the request, which in this case must be a JSON document equivalent to the Client class (where instead of {JSON Object}, a JSON object corresponding to a new order will be used.
 *	With the above, register a new plane (to 'design' a JSON object, you can use this tool). It can be based on the JSON format shown in the browser when consulting an order with the GET method.
