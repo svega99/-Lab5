@@ -63,20 +63,36 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
 
     @Override
     public Blueprint getBlueprint(String author, String bprintname) throws BlueprintNotFoundException {
-        return blueprints.get(new Tuple<>(author, bprintname));
+        
+        if (blueprints.containsKey(new Tuple<>(author, bprintname))){
+            return blueprints.get(new Tuple<>(author, bprintname));
+           
+        }
+        else
+        {
+             throw new BlueprintNotFoundException("El nombre de ese autor no existe");
+        }
+        
     }
 
     @Override
     public Set<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException {
         Set<Blueprint> autores = new HashSet<Blueprint>();
-        
+        int cont=0;
         for (Map.Entry<Tuple<String,String>,Blueprint> blue:blueprints.entrySet()){
             String a=blue.getValue().getAuthor();
             if(a.equals(author)){
                 autores.add(blue.getValue());
+                cont+=1;
             }
         }
-        return autores;
+        if (cont==0){
+            throw new BlueprintNotFoundException("El autor no existe");
+        }
+        else{
+            return autores;  
+        }
+        
     }
 
     @Override
