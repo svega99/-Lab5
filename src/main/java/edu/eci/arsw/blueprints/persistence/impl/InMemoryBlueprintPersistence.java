@@ -13,6 +13,7 @@ import edu.eci.arsw.blueprints.persistence.BlueprintsPersistence;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.springframework.stereotype.Component;
@@ -35,19 +36,25 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
         blueprints.put(new Tuple<>(bp.getAuthor(),bp.getName()), bp);
         
         Point[] pts1=new Point[]{new Point(14, 14),new Point(11, 11)};
-        Blueprint bp1=new Blueprint("mack", "mypaint",pts);
+        Blueprint bp1=new Blueprint("mack", "mypaint",pts1);
         
         Point[] pts2=new Point[]{new Point(10, 10),new Point(15, 15)};
-        Blueprint bp2=new Blueprint("john", "thepaint",pts);
+        Blueprint bp2=new Blueprint("john", "thepaint",pts2);
         
         Point[] pts3=new Point[]{new Point(40, 40),new Point(115, 115)};
-        Blueprint bp3=new Blueprint("john", "otherpaint",pts);
+        Blueprint bp3=new Blueprint("john", "otherpaint",pts3);
+        
+        Point[] pts4=new Point[]{new Point(5, 10),new Point(10, 15),new Point (15,20)};
+        Blueprint bp4=new Blueprint("Santiago", "mipintura",pts4);
+        
         
         blueprints.put(new Tuple<>(bp1.getAuthor(),bp1.getName()), bp1);
         
         blueprints.put(new Tuple<>(bp2.getAuthor(),bp2.getName()), bp2);
         
         blueprints.put(new Tuple<>(bp3.getAuthor(),bp3.getName()), bp3);
+        
+        blueprints.put(new Tuple<>(bp4.getAuthor(),bp4.getName()), bp4);
         
     }    
     
@@ -104,6 +111,11 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
 
         }
         return autores;
+    }
+
+    @Override
+    public void updatePoints(String author, String bprintname, List<Point> points) throws BlueprintNotFoundException {
+        
     }
 
     

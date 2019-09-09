@@ -7,10 +7,12 @@ package edu.eci.arsw.blueprints.controllers;
 
 import edu.eci.arsw.blueprints.filter.Filtering;
 import edu.eci.arsw.blueprints.model.Blueprint;
+import edu.eci.arsw.blueprints.model.Point;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
 import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.services.BlueprintsServices;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -71,7 +73,7 @@ public class BlueprintAPIController {
    }
     
     @RequestMapping(method = RequestMethod.POST)	
-    public ResponseEntity<?> manejadorPostRecursoXX(@RequestBody Blueprint bp){
+    public ResponseEntity<?> manejadorPostRecursoBlueprint(@RequestBody Blueprint bp){
         try {
             bps.addNewBlueprint(bp);
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -81,7 +83,18 @@ public class BlueprintAPIController {
         }        
 
 }
-    
+    @RequestMapping(path="/{author}/{bpname}",method = RequestMethod.PUT)	
+    public ResponseEntity<?> manejadorPostRecursoBlueprintPoints(@PathVariable("author") String author, @PathVariable("bpname") String bpname, @RequestBody List<Point> p){
+        try {
+            Blueprint bp = bps.getBlueprint(author,bpname);
+            bp.setPoints(p);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (BlueprintNotFoundException ex) {
+            Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>(ex.getMessage(),HttpStatus.NOT_FOUND);
+    }        
+
+}
     
     
 }
