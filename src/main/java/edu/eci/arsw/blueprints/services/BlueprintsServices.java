@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import edu.eci.arsw.blueprints.filter.Filtering;
+import java.util.List;
 /**
  *
  * @author hcadavid
@@ -65,8 +66,17 @@ public class BlueprintsServices {
       
     }
     
+    public void updatePoints(String author,String name, List<Point> points) throws BlueprintNotFoundException{
+        bpp.updatePoints(author, name, points);
+    }
+    
     
     public void filter (Blueprint bp){
         fl.filtrar(bp);
+    }
+
+    public void updateBlueprint(Blueprint bpo,Blueprint bpn)throws BlueprintNotFoundException {
+        
+        bpp.updateBlueprint(bpo,bpn);
     }
 }

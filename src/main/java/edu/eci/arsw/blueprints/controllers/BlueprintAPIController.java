@@ -84,10 +84,12 @@ public class BlueprintAPIController {
 
 }
     @RequestMapping(path="/{author}/{bpname}",method = RequestMethod.PUT)	
-    public ResponseEntity<?> manejadorPostRecursoBlueprintPoints(@PathVariable("author") String author, @PathVariable("bpname") String bpname, @RequestBody List<Point> p){
+    public ResponseEntity<?> manejadorPostRecursoBlueprintPoints(@PathVariable("author") String author, 
+                                                                   @PathVariable("bpname") String bpname, 
+                                                                   @RequestBody Blueprint bpn){
         try {
-            Blueprint bp = bps.getBlueprint(author,bpname);
-            bp.setPoints(p);
+            Blueprint bpo= bps.getBlueprint(author, bpname);
+            bps.updateBlueprint( bpo,bpn);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (BlueprintNotFoundException ex) {
             Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
